@@ -11,6 +11,15 @@ import MetricSlider from './components/metricSlider/MetricSlider';
 const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 
 function App() {
+  async function fetchData() {
+    try {
+      const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=utrecht,nl&appid=${apiKey}&lang=nl`);
+      const weatherData = response.data;
+      console.log(weatherData);
+    } catch (e) {
+      console.error(e);
+    }
+  }
   return (
     <>
       <div className="weather-container">
