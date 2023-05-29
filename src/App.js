@@ -12,6 +12,7 @@ const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 
 function App() {
     const [weatherData, setWeatherData] = useState({});
+    const [location, setLocation] = useState('');
 
     async function fetchData() {
         try {
@@ -29,7 +30,7 @@ function App() {
 
                 {/*HEADER -------------------- */}
                 <div className="weather-header">
-                    <SearchBar/>
+                    <SearchBar setLocationHandler={setLocation}/>
 
                     <span className="location-details">
                         {Object.keys(weatherData).length > 0 &&
