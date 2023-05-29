@@ -6,7 +6,6 @@ function SearchBar() {
 
     function onFormSubmit(e) {
         e.preventDefault();
-
     }
 
     return (
@@ -21,7 +20,7 @@ function SearchBar() {
 
             <button
                 type="submit"
-                onSubmit={}
+                onSubmit={onFormSubmit}
             >
                 Zoek
             </button>
