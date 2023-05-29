@@ -1,8 +1,14 @@
+//Functions
 import React from 'react';
 import './App.css';
+import axios from "axios";
+
+//Components
 import SearchBar from './components/searchBar/SearchBar';
 import TabBarMenu from './components/tabBarMenu/TabBarMenu';
 import MetricSlider from './components/metricSlider/MetricSlider';
+
+const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 
 function App() {
   return (
