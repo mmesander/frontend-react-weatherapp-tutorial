@@ -5,7 +5,7 @@ function ForecastTab({coordinates, key}) {
     const [forecasts, setForecasts] = useState([]);
 
     useEffect(() => {
-    }, [coordinates]);
+    }, [coordinates])
 
     return (
     <div className="tab-wrapper">
