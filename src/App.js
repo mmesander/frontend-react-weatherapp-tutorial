@@ -54,7 +54,7 @@ function App() {
                     <TabBarMenu/>
 
                     <div className="tab-wrapper">
-                        <ForecastTab coordinates={weatherData.coord} key={apiKey}/>
+                        <ForecastTab coordinates={weatherData.coord}/>
                     </div>
                 </div>
 
