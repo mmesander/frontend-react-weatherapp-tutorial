@@ -15,18 +15,19 @@ function App() {
     const [location, setLocation] = useState('');
 
     useEffect(() => {
-    async function fetchData() {
-        try {
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=utrecht,nl&appid=${apiKey}&lang=nl`);
-            console.log(response.data);
-            setWeatherData(response.data);
-        } catch (e) {
-            console.error(e);
+        async function fetchData() {
+            try {
+                const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
+                console.log(response.data);
+                setWeatherData(response.data);
+            } catch (e) {
+                console.error(e);
+            }
         }
-    }
 
-    fetchData();
-
+        if (location) {
+            fetchData();
+        }
     }, [location]);
     return (
         <>
@@ -44,7 +45,7 @@ function App() {
                                 <h1>{weatherData.main.temp}</h1>
                             </>
                         }
-          </span>
+                    </span>
                 </div>
 
                 {/*CONTENT ------------------ */}
