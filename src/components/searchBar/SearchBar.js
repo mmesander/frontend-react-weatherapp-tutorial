@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './SearchBar.css';
 
-function SearchBar({setLocationHandler}) {
+function SearchBar({ setLocationHandler }) {
     const [query, setQuery] = useState('');
 
     function onFormSubmit(e) {
@@ -10,7 +10,7 @@ function SearchBar({setLocationHandler}) {
     }
 
     return (
-        <form className="searchbar">
+        <form className="searchbar" onSubmit={onFormSubmit}>
             <input
                 type="text"
                 name="search"
@@ -21,7 +21,6 @@ function SearchBar({setLocationHandler}) {
 
             <button
                 type="submit"
-                onSubmit={onFormSubmit}
             >
                 Zoek
             </button>

@@ -1,5 +1,5 @@
 //Functions
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import axios from "axios";
 
@@ -14,16 +14,21 @@ function App() {
     const [weatherData, setWeatherData] = useState({});
     const [location, setLocation] = useState('');
 
-    async function fetchData() {
-        try {
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=utrecht,nl&appid=${apiKey}&lang=nl`);
-            console.log(response.data);
-            setWeatherData(response.data);
-        } catch (e) {
-            console.error(e);
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
+                console.log(response.data);
+                setWeatherData(response.data);
+            } catch (e) {
+                console.error(e);
+            }
         }
-    }
 
+        if (location) {
+            fetchData();
+        }
+    }, [location]);
     return (
         <>
             <div className="weather-container">
@@ -40,14 +45,7 @@ function App() {
                                 <h1>{weatherData.main.temp}</h1>
                             </>
                         }
-
-                        <button
-                            type="button"
-                            onClick={fetchData}
-                        >
-              Haal data op!
-            </button>
-          </span>
+                    </span>
                 </div>
 
                 {/*CONTENT ------------------ */}
