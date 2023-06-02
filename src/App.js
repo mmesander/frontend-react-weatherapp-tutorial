@@ -10,6 +10,7 @@ import MetricSlider from './components/metricSlider/MetricSlider';
 import ForecastTab from './pages/forecastTab/ForecastTab';
 import {Routes, Route} from "react-router-dom";
 import TodayTab from "./pages/todayTab/TodayTab";
+import kelvinToCelsius from "./helpers/kelvinToCelsius";
 
 const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 
@@ -22,7 +23,7 @@ function App() {
         async function fetchData() {
             try {
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
-                console.log(response.data);
+                // console.log(response.data);
                 setWeatherData(response.data);
                 setError(false);
             } catch (e) {
@@ -53,7 +54,7 @@ function App() {
                             <>
                                 <h2>{weatherData.weather[0].description}</h2>
                                 <h3>{weatherData.name}</h3>
-                                <h1>{weatherData.main.temp}</h1>
+                                <h1>{kelvinToCelsius(weatherData.main.temp)}</h1>
                             </>
                         }
                     </span>
@@ -65,7 +66,7 @@ function App() {
 
                     <div className="tab-wrapper">
                         <Routes>
-                            <Route path="/" element={<TodayTab/>}/>
+                            <Route path="/" element={<TodayTab coordinates={weatherData.coord}/>}/>
                             <Route path="/komende-week" element={<ForecastTab coordinates={weatherData.coord}/>}/>
                         </Routes>
                     </div>
