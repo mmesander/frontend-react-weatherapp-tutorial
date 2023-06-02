@@ -60,6 +60,7 @@ function ForecastTab({coordinates}) {
                     Zoek eerst een locatie om het weer voor deze week te bekijken
                 </span>
             }
+
             {forecasts.map((day) => {
                 return <article key={day.dt} className="forecast-day">
                     <p className="day-description">
