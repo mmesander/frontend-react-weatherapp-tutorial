@@ -12,23 +12,32 @@ function createDateString(timestamp) {
 function ForecastTab({coordinates}) {
     const [forecasts, setForecasts] = useState([]);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchForecasts() {
+            setLoading(true);
             try {
                 // const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.long}&appid=${apiKey}&lang=nl`);
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,current,hourly&appid=${apiKey}&lang=nl`);
-                console.log(response.data);
+                // console.log(response.data);
                 const fiveDayForecast = response.data.list.filter((singleForecast) => {
                     return singleForecast.dt_txt.includes("12:00:00");
                 });
+
+                if (response.data) {
+                    setError(false);
+                }
+
                 setForecasts(fiveDayForecast);
-                setError(false);
-                console.log(forecasts);
+
+                // console.log(forecasts);
             } catch (e) {
                 setError(true);
                 console.error(e);
             }
+
+            setLoading(false);
         }
 
         if (coordinates) {
@@ -44,7 +53,12 @@ function ForecastTab({coordinates}) {
                     Er is iets misgegaan met het ophalen van de data
                 </span>
             }
-            {forecasts.length === 0 && !error &&
+            {loading &&
+                <span className="no-forecast">
+                    Laden, duuuuurt lang!!!
+                </span>
+            }
+            {forecasts.length === 0 && !error && !loading &&
                 <span className="no-forecast">
                     Zoek eerst een locatie om het weer voor deze week te bekijken
                 </span>
