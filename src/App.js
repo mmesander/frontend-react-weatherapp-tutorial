@@ -27,7 +27,7 @@ function App() {
         }
 
         if (location) {
-            fetchData();
+            void fetchData();
         }
     }, [location]);
     return (

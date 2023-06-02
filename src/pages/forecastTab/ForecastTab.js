@@ -12,7 +12,7 @@ function ForecastTab({coordinates}) {
             try {
                 // const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.long}&appid=${apiKey}&lang=nl`);
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=minutely,current,hourly&appid=${apiKey}&lang=nl`);
-                console.log(response.data)
+                console.log(response.data);
             } catch (e) {
                 console.error(e);
             }
