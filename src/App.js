@@ -66,7 +66,7 @@ function App() {
 
                     <div className="tab-wrapper">
                         <Routes>
-                            <Route path="/" element={<TodayTab/>}/>
+                            <Route path="/" element={<TodayTab coordinates={weatherData.coord}/>}/>
                             <Route path="/komende-week" element={<ForecastTab coordinates={weatherData.coord}/>}/>
                         </Routes>
                     </div>
