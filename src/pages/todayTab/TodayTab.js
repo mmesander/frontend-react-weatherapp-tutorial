@@ -1,7 +1,9 @@
 import React from 'react';
 import './TodayTab.css';
 
-function TodayTab() {
+function TodayTab({coordinates}) {
+
+
 	return(
 		<div className="tab-wrapper">
 			<div className="chart">

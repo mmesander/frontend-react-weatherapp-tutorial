@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './ForecastTab.css';
 import axios from "axios";
+import createDateString from "../../helpers/createDateString";
 
 const apiKey = '08ebcec99a4487212029dd95f36fa8de'
 
-function createDateString(timestamp) {
-    const day = new Date(timestamp * 1000);
-    return day.toLocaleDateString(`nl-NL`, {weekday: 'long'});
-}
 
 function ForecastTab({coordinates}) {
     const [forecasts, setForecasts] = useState([]);
