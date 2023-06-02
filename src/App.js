@@ -8,6 +8,8 @@ import SearchBar from './components/searchBar/SearchBar';
 import TabBarMenu from './components/tabBarMenu/TabBarMenu';
 import MetricSlider from './components/metricSlider/MetricSlider';
 import ForecastTab from './pages/forecastTab/ForecastTab';
+import {Routes, Route} from "react-router-dom";
+import TodayTab from "./pages/todayTab/TodayTab";
 
 const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 
@@ -35,18 +37,18 @@ function App() {
     }, [location]);
     return (
         <>
-        <div className="weather-container">
+            <div className="weather-container">
 
-            {/*HEADER -------------------- */}
-            <div className="weather-header">
-                <SearchBar setLocationHandler={setLocation}/>
-                {error &&
-                    <div className="wrong-location-error">
-                        Oeps! Deze locatie bestaat niet!
-                    </div>
-            }
+                {/*HEADER -------------------- */}
+                <div className="weather-header">
+                    <SearchBar setLocationHandler={setLocation}/>
+                    {error &&
+                        <div className="wrong-location-error">
+                            Oeps! Deze locatie bestaat niet!
+                        </div>
+                    }
 
-            <span className="location-details">
+                    <span className="location-details">
                         {Object.keys(weatherData).length > 0 &&
                             <>
                                 <h2>{weatherData.weather[0].description}</h2>
@@ -55,22 +57,25 @@ function App() {
                             </>
                         }
                     </span>
-        </div>
+                </div>
 
-        {/*CONTENT ------------------ */}
-        <div className="weather-content">
-            <TabBarMenu/>
+                {/*CONTENT ------------------ */}
+                <div className="weather-content">
+                    <TabBarMenu/>
 
-            <div className="tab-wrapper">
-                <ForecastTab coordinates={weatherData.coord}/>
+                    <div className="tab-wrapper">
+                        <Routes>
+                            <Route path="/" element={<TodayTab/>}/>
+                            <Route path="/komende-week" element={<ForecastTab coordinates={weatherData.coord}/>}/>
+                        </Routes>
+                    </div>
+                </div>
+
+                <MetricSlider/>
             </div>
-        </div>
-
-        <MetricSlider/>
-        </div>
-</>
-)
-    ;
+        </>
+    )
+        ;
 }
 
 export default App;
