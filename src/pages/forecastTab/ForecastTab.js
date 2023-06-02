@@ -53,9 +53,9 @@ function ForecastTab({coordinates}) {
                     Er is iets misgegaan met het ophalen van de data
                 </span>
             }
-            {loading &&
+            {loading && forecasts.length === 0 &&
                 <span className="no-forecast">
-                    Laden, duuuuurt lang!!!
+                    Data wordt opgehaald!!!
                 </span>
             }
             {forecasts.length === 0 && !error && !loading &&
