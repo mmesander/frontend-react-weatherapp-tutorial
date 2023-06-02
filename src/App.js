@@ -14,6 +14,7 @@ const apiKey = '08ebcec99a4487212029dd95f36fa8de';
 function App() {
     const [weatherData, setWeatherData] = useState({});
     const [location, setLocation] = useState('');
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -21,7 +22,9 @@ function App() {
                 const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
                 console.log(response.data);
                 setWeatherData(response.data);
+                setError(false);
             } catch (e) {
+                setError(true);
                 console.error(e);
             }
         }
@@ -32,13 +35,18 @@ function App() {
     }, [location]);
     return (
         <>
-            <div className="weather-container">
+        <div className="weather-container">
 
-                {/*HEADER -------------------- */}
-                <div className="weather-header">
-                    <SearchBar setLocationHandler={setLocation}/>
+            {/*HEADER -------------------- */}
+            <div className="weather-header">
+                <SearchBar setLocationHandler={setLocation}/>
+                {error &&
+                    <div className="wrong-location-error">
+                        Oeps! Deze locatie bestaat niet!
+                    </div>
+            }
 
-                    <span className="location-details">
+            <span className="location-details">
                         {Object.keys(weatherData).length > 0 &&
                             <>
                                 <h2>{weatherData.weather[0].description}</h2>
@@ -47,21 +55,22 @@ function App() {
                             </>
                         }
                     </span>
-                </div>
+        </div>
 
-                {/*CONTENT ------------------ */}
-                <div className="weather-content">
-                    <TabBarMenu/>
+        {/*CONTENT ------------------ */}
+        <div className="weather-content">
+            <TabBarMenu/>
 
-                    <div className="tab-wrapper">
-                        <ForecastTab coordinates={weatherData.coord}/>
-                    </div>
-                </div>
-
-                <MetricSlider/>
+            <div className="tab-wrapper">
+                <ForecastTab coordinates={weatherData.coord}/>
             </div>
-        </>
-    );
+        </div>
+
+        <MetricSlider/>
+        </div>
+</>
+)
+    ;
 }
 
 export default App;

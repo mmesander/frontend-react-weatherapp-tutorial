@@ -27,3 +27,7 @@
     font-size: 10px;
     color: #C6BCB3;
 }
+
+.error-message {
+    color: red;
+}

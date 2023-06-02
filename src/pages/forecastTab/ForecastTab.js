@@ -11,6 +11,7 @@ function createDateString(timestamp) {
 
 function ForecastTab({coordinates}) {
     const [forecasts, setForecasts] = useState([]);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function fetchForecasts() {
@@ -22,8 +23,10 @@ function ForecastTab({coordinates}) {
                     return singleForecast.dt_txt.includes("12:00:00");
                 });
                 setForecasts(fiveDayForecast);
-                console.log(forecasts)
+                setError(false);
+                console.log(forecasts);
             } catch (e) {
+                setError(true);
                 console.error(e);
             }
         }
@@ -36,6 +39,16 @@ function ForecastTab({coordinates}) {
 
     return (
         <div className="tab-wrapper">
+            {error &&
+                <span className="error-message">
+                    Er is iets misgegaan met het ophalen van de data
+                </span>
+            }
+            {forecasts.length === 0 && !error &&
+                <span className="no-forecast">
+                    Zoek eerst een locatie om het weer voor deze week te bekijken
+                </span>
+            }
             {forecasts.map((day) => {
                 return <article key={day.dt} className="forecast-day">
                     <p className="day-description">
