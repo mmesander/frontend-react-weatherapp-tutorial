@@ -3,9 +3,6 @@ import './ForecastTab.css';
 import axios from "axios";
 import createDateString from "../../helpers/createDateString";
 
-const apiKey = '08ebcec99a4487212029dd95f36fa8de'
-
-
 function ForecastTab({coordinates}) {
     const [forecasts, setForecasts] = useState([]);
     const [error, setError] = useState(false);

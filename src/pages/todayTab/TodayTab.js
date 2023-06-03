@@ -2,11 +2,8 @@ import React, {useEffect} from 'react';
 import './TodayTab.css';
 import {useState} from "react";
 import axios from "axios";
-import weatherDetail from "../../components/weatherDetail/WeatherDetail";
 import WeatherDetail from "../../components/weatherDetail/WeatherDetail";
 import createTimeString from "../../helpers/createTimeString";
-
-const apiKey = '08ebcec99a4487212029dd95f36fa8de'
 
 function TodayTab({coordinates}) {
     const [error, setError] = useState(false);
