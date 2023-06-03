@@ -8,10 +8,11 @@ import TempContextProvider from "./context/TempProvider";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <Router>
-            <TempContextProvider>
+        <TempContextProvider>
+            <Router>
+
                 <App/>
-            </TempContextProvider>
-        </Router>
+            </Router>
+        </TempContextProvider>
     </React.StrictMode>
 );
