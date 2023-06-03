@@ -20,7 +20,7 @@ function App() {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${apiKey}&lang=nl`);
+                const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${process.env.REACT_APP_API_KEY}&lang=nl`);
                 // console.log(response.data);
                 setWeatherData(response.data);
                 setError(false);
